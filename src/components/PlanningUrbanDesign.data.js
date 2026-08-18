@@ -1,0 +1,32 @@
+export const planningUrbanDesignProjects = [
+  {
+    id: "p1",
+    src: "/project3.webp",
+    title: "South Bay Regional Masterplan",
+    location: "Doha, Qatar",
+    year: "2023",
+    area: "350 Hectares",
+    category: "Planning + Urban Design",
+    description: "A comprehensive coastal territorial masterplan incorporating mixed-use commercial districts, cultural corridors, and flood-resilient marine park networks.",
+  },
+  {
+    id: "p2",
+    src: "/project6.webp",
+    title: "Kochi Marine Promenade Masterplan",
+    location: "Kochi, Kerala",
+    year: "2024",
+    area: "180 Hectares",
+    category: "Planning + Urban Design",
+    description: "Revitalization of historic maritime canals and waterways into active multimodal transit corridors with pedestrian-only waterfront boulevards.",
+  },
+  {
+    id: "p3",
+    src: "/planning1.webp",
+    title: "Bengaluru Smart Innovation Quarter",
+    location: "Bengaluru, India",
+    year: "2024",
+    area: "220 Hectares",
+    category: "Planning + Urban Design",
+    description: "A transit-oriented urban district designed on a 15-minute walkable grid, integrating self-sufficient micro-grids and sponge infrastructure.",
+  },
+];

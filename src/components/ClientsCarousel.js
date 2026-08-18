@@ -1,49 +1,7 @@
 "use client";
 
 import { Handshake } from "lucide-react";
-
-const clientLogos = [
-  {
-    name: "EMAAR",
-    subtext: "PROPERTIES",
-  },
-  {
-    name: "DUBAI",
-    subtext: "MUNICIPALITY",
-  },
-  {
-    name: "BENGALURU",
-    subtext: "SMART CITY",
-  },
-  {
-    name: "KERALA IT",
-    subtext: "STATE MISSION",
-  },
-  {
-    name: "SOBHA",
-    subtext: "REALTY",
-  },
-  {
-    name: "SHAPOORJI",
-    subtext: "PALLONJI",
-  },
-  {
-    name: "KOCHI METRO",
-    subtext: "RAIL LTD",
-  },
-  {
-    name: "AL FUTTAIM",
-    subtext: "GROUP",
-  },
-  {
-    name: "GODREJ",
-    subtext: "PROPERTIES",
-  },
-  {
-    name: "TATA",
-    subtext: "REALTY",
-  },
-];
+import { clientLogos } from "./ClientsCarousel.data";
 
 export default function ClientsCarousel() {
   // Duplicate array for seamless infinite marquee loop

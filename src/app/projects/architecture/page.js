@@ -1,9 +1,10 @@
-import Naavbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar";
 import Architecture from "@/components/Architecture";
+
 export default function ArchitecturePage() {
   return (
     <>
-      <Naavbar />
+      <Navbar />
       <Architecture />
     </>
   );

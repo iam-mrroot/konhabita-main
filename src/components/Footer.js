@@ -1,20 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUp, ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowUp, Mail, MapPin } from "lucide-react";
+import { links } from "./Footer.data";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-
-  const links = [
-    { name: "Home", href: "/home" },
-    { name: "Expertise", href: "/expertise/landscape-expertise" },
-    { name: "Projects", href: "/projects" },
-    { name: "Studio", href: "/studio" },
-    { name: "News & Events", href: "/news" },
-    { name: "Join Us", href: "/join-us" },
-    { name: "Contact", href: "/contact" },
-  ];
 
   return (
     <footer className="relative bg-[#072638] text-white selection:bg-[#d97736]">

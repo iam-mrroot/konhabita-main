@@ -4,25 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Phone, Mail } from "lucide-react";
-
-const categories = [
-  {
-    name: "For Collaboration",
-    link: "/contact/collaboration",
-  },
-  {
-    name: "Project Enquiry",
-    link: "/contact/project-enquiry",
-  },
-];
+import { categories } from "./ForCollaboration.data";
 
 export default function ForCollaboration() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-white">
 
-      {/* =====================================================
-          BACKGROUND IMAGE
-      ====================================================== */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/collaboration.jpg"
@@ -48,9 +35,6 @@ export default function ForCollaboration() {
         <div className="absolute inset-0 bg-white/10 sm:bg-transparent" />
       </div>
 
-      {/* =====================================================
-          CONTENT
-      ====================================================== */}
       <div className="relative z-10">
 
         <div
@@ -65,9 +49,7 @@ export default function ForCollaboration() {
           "
         >
 
-          {/* =================================================
-              LEFT MENU
-          ================================================= */}
+          {/* LEFT MENU */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -129,7 +111,6 @@ export default function ForCollaboration() {
                     "
                   >
 
-                    {/* Hover indicator */}
                     <span
                       className="
                         absolute
@@ -173,9 +154,7 @@ export default function ForCollaboration() {
           </motion.div>
 
 
-          {/* =================================================
-              RIGHT DESCRIPTION
-          ================================================= */}
+          {/* RIGHT DESCRIPTION */}
           <motion.div
             initial={{
               opacity: 0,
@@ -238,9 +217,7 @@ export default function ForCollaboration() {
         </div>
 
 
-        {/* =====================================================
-            CONTACT DETAILS
-        ====================================================== */}
+        {/* CONTACT DETAILS */}
         <motion.div
           initial={{
             opacity: 0,
@@ -295,9 +272,7 @@ export default function ForCollaboration() {
             "
           >
 
-            {/* =================================================
-                PHONE
-            ================================================= */}
+            {/* PHONE */}
             <div className="flex w-full items-center gap-3 sm:w-auto">
 
               <div
@@ -352,9 +327,7 @@ export default function ForCollaboration() {
             </div>
 
 
-            {/* =================================================
-                EMAIL
-            ================================================= */}
+            {/* EMAIL */}
             <div className="flex w-full items-center gap-3 sm:w-auto">
 
               <div
@@ -407,9 +380,7 @@ export default function ForCollaboration() {
         </motion.div>
 
 
-        {/* =====================================================
-            BOTTOM LINE
-        ====================================================== */}
+        {/* BOTTOM LINE */}
         <div
           className="
             absolute

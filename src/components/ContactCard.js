@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
 
 export default function ContactCard() {
   return (
@@ -21,7 +20,6 @@ export default function ContactCard() {
         selection:text-white
       "
     >
-      {/* ================= BACKGROUND IMAGE ================= */}
       <div className="absolute inset-0">
         <Image
           src="/contact-bg.jpg"
@@ -32,12 +30,10 @@ export default function ContactCard() {
           className="object-cover object-center"
         />
 
-        {/* SOFT WHITE OVERLAY */}
         <div className="absolute inset-0 bg-white/75 backdrop-blur-[0.5px]" />
         <div className="absolute inset-0 pointer-events-none blueprint-grid opacity-15" />
       </div>
 
-      {/* ================= CONTENT ================= */}
       <div
         className="
           relative
@@ -60,7 +56,6 @@ export default function ContactCard() {
           md:pt-0
         "
       >
-        {/* ================= TOP TITLE ================= */}
         <div
           className="
             relative
@@ -87,7 +82,6 @@ export default function ContactCard() {
             Let’s Design Together
           </h2>
 
-          {/* SMALL DECORATIVE LINE */}
           <div
             className="
               mx-auto
@@ -100,7 +94,6 @@ export default function ContactCard() {
           />
         </div>
 
-        {/* ================= CENTER DIVIDER ================= */}
         <div
           className="
             hidden
@@ -117,7 +110,6 @@ export default function ContactCard() {
           "
         />
 
-        {/* ================= MOBILE BUTTON AREA ================= */}
         <div
           className="
             mt-20
@@ -133,7 +125,6 @@ export default function ContactCard() {
             md:hidden
           "
         >
-          {/* CAREER */}
           <Link
             href="/join-us"
             className="
@@ -175,7 +166,6 @@ export default function ContactCard() {
             />
           </Link>
 
-          {/* CONTACT */}
           <Link
             href="/contact"
             className="
@@ -218,7 +208,6 @@ export default function ContactCard() {
           </Link>
         </div>
 
-        {/* ================= DESKTOP CAREER ================= */}
         <div
           className="
             hidden
@@ -275,7 +264,6 @@ export default function ContactCard() {
           </Link>
         </div>
 
-        {/* ================= DESKTOP CONTACT ================= */}
         <div
           className="
             hidden

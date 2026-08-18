@@ -1,10 +1,11 @@
 import Navbar from "@/components/Navbar";
 import CareersIntro from "@/components/CareersIntro";
+
 export default function JoinUsPage() {
-  return (  
+  return (
     <>
       <Navbar />
-      <CareersIntro />  
+      <CareersIntro />
     </>
   );
-}   
+}

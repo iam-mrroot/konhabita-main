@@ -2,21 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { newsCategories } from "@/data/newsCategories";
 
-const categories = [
-  {
-    name: "Podcasts",
-    link: "/news/podcasts",
-  },
-  {
-    name: "Workshops",
-    link: "/news/workshops",
-  },
-  {
-    name: "Monthly Events",
-    link: "/news/monthly-events",
-  },
-];
+// Standard ease curve reused across this component's motion transitions.
+const EASE_STANDARD = [0.22, 1, 0.36, 1];
+
 export default function NewsEventsIntro() {
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-white">
@@ -43,7 +33,7 @@ export default function NewsEventsIntro() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{
             duration: 0.8,
-            ease: [0.22, 1, 0.36, 1],
+            ease: EASE_STANDARD,
           }}
           className="
             lg:col-span-6
@@ -57,7 +47,7 @@ export default function NewsEventsIntro() {
           "
         >
           <nav className="w-full max-w-[260px]">
-            {categories.map((item, index) => (
+            {newsCategories.map((item, index) => (
               <motion.div
                 key={item.name}
                 initial={{ opacity: 0, y: 15 }}
@@ -109,7 +99,7 @@ export default function NewsEventsIntro() {
           transition={{
             duration: 0.9,
             delay: 0.2,
-            ease: [0.22, 1, 0.36, 1],
+            ease: EASE_STANDARD,
           }}
           className="
             lg:col-span-6

@@ -4,17 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
-
-const links = [
-  { name: "Home", href: "/home" },
-  { name: "Expertise", href: "/expertise/landscape-expertise" },
-  { name: "Projects", href: "/projects" },
-  { name: "Studio", href: "/studio" },
-  { name: "News & Events", href: "/news" },
-  { name: "Join Us", href: "/join-us" },
-  { name: "Contact", href: "/contact" },
-];
+import { Menu, X, ArrowUpRight } from "lucide-react";
+import { links } from "./Navbar.data";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);

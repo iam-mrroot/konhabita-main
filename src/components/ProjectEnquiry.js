@@ -4,24 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Phone, Mail } from "lucide-react";
-
-const categories = [
-  {
-    name: "For Collaboration",
-    link: "/contact/collaboration",
-  },
-  {
-    name: "Project Enquiry",
-    link: "/contact/project-enquiry",
-  },
-];
+import { categories } from "./ProjectEnquiry.data";
 
 export default function ProjectEnquiry() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-white">
-      {/* =====================================================
-          BACKGROUND IMAGE
-      ====================================================== */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/project-enquiry.jpg"
@@ -44,9 +31,6 @@ export default function ProjectEnquiry() {
         <div className="absolute inset-0 bg-[#eaf3f7]/15" />
       </div>
 
-      {/* =====================================================
-          CONTENT
-      ====================================================== */}
       <div className="relative z-10 min-h-screen">
         <div
   className="
@@ -76,9 +60,7 @@ export default function ProjectEnquiry() {
     lg:py-0
   "
 >
-          {/* =================================================
-              LEFT MENU
-          ================================================= */}
+          {/* LEFT MENU */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -138,7 +120,6 @@ export default function ProjectEnquiry() {
                       sm:py-4
                     "
                   >
-                    {/* Hover indicator */}
                     <span
                       className="
                         absolute
@@ -179,9 +160,7 @@ export default function ProjectEnquiry() {
             </nav>
           </motion.div>
 
-          {/* =================================================
-              DESCRIPTION
-          ================================================= */}
+          {/* DESCRIPTION */}
           <motion.div
             initial={{
               opacity: 0,
@@ -260,9 +239,7 @@ export default function ProjectEnquiry() {
             </div>
           </motion.div>
 
-          {/* =================================================
-              CONTACT DETAILS
-          ================================================= */}
+          {/* CONTACT DETAILS */}
           <motion.div
             initial={{
               opacity: 0,
@@ -313,9 +290,7 @@ export default function ProjectEnquiry() {
                 lg:gap-12
               "
             >
-              {/* =================================================
-                  PHONE
-              ================================================= */}
+              {/* PHONE */}
               <a
                 href="tel:xxxxxxxxxxx"
                 className="
@@ -370,9 +345,7 @@ export default function ProjectEnquiry() {
                 </span>
               </a>
 
-              {/* =================================================
-                  EMAIL
-              ================================================= */}
+              {/* EMAIL */}
               <a
                 href="mailto:xxxxx@konhabita.com"
                 className="
@@ -427,9 +400,7 @@ export default function ProjectEnquiry() {
           </motion.div>
         </div>
 
-        {/* =====================================================
-            BOTTOM LINE
-        ====================================================== */}
+        {/* BOTTOM LINE */}
         <div
           className="
             absolute

@@ -2,67 +2,21 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { X } from "lucide-react";
+import { team } from "./DesignTeam.data";
+import DesignTeamMemberModal from "./DesignTeamMemberModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const team = [
-  {
-    name: "Ar. Anagha",
-    role: "AGM - Lead Architect",
-    image: "/team/anagha.jpg",
-    bio: "Lead architect overseeing institutional masterplans, biophilic material systems, and complex architectural detailing.",
-  },
-  {
-    name: "Ar. Koushik Varma",
-    role: "Lead - Landscape Architect",
-    image: "/team/koushik.jpg",
-    bio: "Specializing in civic parklands, sponge-city stormwater networks, and arid-climate botanical restoration.",
-  },
-  {
-    name: "Ar. Shruthi Laxmi",
-    role: "DM - Sustainable Architect",
-    image: "/team/shruthi.jpg",
-    bio: "Pioneering passive computational CFD modeling, thermal comfort simulations, and net-zero energy design frameworks.",
-  },
-  {
-    name: "Ar. Indrajit Koner",
-    role: "Urban Planner",
-    image: "/team/indrajit.jpg",
-    bio: "Specializing in regional GIS territorial zoning, transit-oriented development corridors, and smart city infrastructure.",
-  },
-  {
-    name: "Ar. Anand Raj",
-    role: "Senior Architect",
-    image: "/team/anand.jpg",
-    bio: "Directing architectural site execution, tectonic joinery detailing, and high-performance commercial envelopes.",
-  },
-  {
-    name: "Ar. Swetha S",
-    role: "Architect",
-    image: "/team/swetha.jpg",
-    bio: "Focusing on tropical residential architecture, daylighting studies, and biophilic interior spaces.",
-  },
-  {
-    name: "Ar. Balaji M",
-    role: "Architect",
-    image: "/team/balaji.jpg",
-    bio: "Expert in parametric modeling, BIM documentation, and modular prefabricated construction systems.",
-  },
-  {
-    name: "Godwin Leo",
-    role: "Senior 3D Visualiser",
-    image: "/team/godwin.jpg",
-    bio: "Creating hyper-realistic architectural CGI visuals, computational light simulations, and cinematic studio animations.",
-  },
-];
+// Team card entrance animation, triggered as the grid scrolls into view
+const CARD_ENTRANCE_Y_OFFSET = 35;
+const CARD_ENTRANCE_DURATION = 0.8;
+const CARD_ENTRANCE_STAGGER = 0.1;
+const CARD_SCROLL_TRIGGER_START = "top 85%";
 
 export default function DesignTeam() {
   const sectionRef = useRef(null);
-  const introRef = useRef(null);
   const teamRef = useRef(null);
   const [selectedMember, setSelectedMember] = useState(null);
 
@@ -76,18 +30,18 @@ export default function DesignTeam() {
       if (cards?.length) {
         gsap.set(cards, {
           opacity: 0,
-          y: 35,
+          y: CARD_ENTRANCE_Y_OFFSET,
         });
 
         gsap.to(cards, {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.1,
+          duration: CARD_ENTRANCE_DURATION,
+          stagger: CARD_ENTRANCE_STAGGER,
           ease: "power3.out",
           scrollTrigger: {
             trigger: teamRef.current,
-            start: "top 85%",
+            start: CARD_SCROLL_TRIGGER_START,
             toggleActions: "play none none reverse",
           },
         });
@@ -348,61 +302,10 @@ export default function DesignTeam() {
         </div>
       </section>
 
-      {/* ================= MEMBER BIO MODAL ================= */}
-      {selectedMember && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 sm:p-6 backdrop-blur-md animate-fade-in">
-          <div className="relative max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-3xl bg-white p-6 sm:p-10 shadow-2xl text-[#0d4969]">
-            <button
-              type="button"
-              aria-label="Close modal"
-              onClick={() => setSelectedMember(null)}
-              className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-[#0d4969] hover:bg-[#0d4969] hover:text-white transition-colors"
-            >
-              <X size={20} />
-            </button>
-
-            <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-              <div className="relative h-36 w-36 shrink-0 overflow-hidden rounded-2xl bg-slate-100">
-                <Image
-                  src={selectedMember.image}
-                  alt={selectedMember.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="space-y-1 text-center sm:text-left">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#d97736]">
-                  Design Team
-                </span>
-                <h3 className="text-2xl font-light text-[#0d4969]">{selectedMember.name}</h3>
-                <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  {selectedMember.role}
-                </p>
-                <p className="pt-3 text-sm font-light leading-relaxed text-gray-700">
-                  {selectedMember.bio}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8 flex items-center justify-between border-t border-[#0d4969]/10 pt-6">
-              <Link
-                href="/join-us"
-                className="rounded-full bg-[#0d4969] px-6 py-2.5 text-xs font-medium uppercase tracking-wider text-white hover:bg-[#d97736] transition-colors"
-              >
-                Join Design Atelier
-              </Link>
-              <button
-                type="button"
-                onClick={() => setSelectedMember(null)}
-                className="text-xs uppercase tracking-wider text-gray-500"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <DesignTeamMemberModal
+        member={selectedMember}
+        onClose={() => setSelectedMember(null)}
+      />
     </main>
   );
 }

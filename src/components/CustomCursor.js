@@ -2,6 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 
+// Below this width the cursor is assumed to be touch/coarse input, so the
+// custom cursor is disabled and the native cursor is used instead.
+const DESKTOP_POINTER_MIN_WIDTH = 1024;
+
+// How quickly the trailing ring catches up to the pointer each frame
+// (0 = never moves, 1 = snaps instantly).
+const RING_LERP_FACTOR = 0.18;
+
 export default function CustomCursor() {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
@@ -17,7 +25,7 @@ export default function CustomCursor() {
 
   useEffect(() => {
     // Only enable on desktop pointer devices
-    if (typeof window === "undefined" || window.innerWidth < 1024) return;
+    if (typeof window === "undefined" || window.innerWidth < DESKTOP_POINTER_MIN_WIDTH) return;
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const handleMouseMove = (e) => {
@@ -63,8 +71,8 @@ export default function CustomCursor() {
 
     // Smooth lerp loop for outer ring
     const render = () => {
-      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.18;
-      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.18;
+      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * RING_LERP_FACTOR;
+      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * RING_LERP_FACTOR;
 
       if (ringRef.current) {
         ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0) translate(-50%, -50%)`;
@@ -89,7 +97,7 @@ export default function CustomCursor() {
     };
   }, [isVisible]);
 
-  if (typeof window !== "undefined" && window.innerWidth < 1024) return null;
+  if (typeof window !== "undefined" && window.innerWidth < DESKTOP_POINTER_MIN_WIDTH) return null;
 
   return (
     <>

@@ -3,17 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { careersNavLinks } from "./careersNavLinks.data";
 
-const categories = [
-  {
-    name: "Internship",
-    link: "/join-us/internship",
-  },
-  {
-    name: "Career Opportunity",
-    link: "/join-us/career-opportunity",
-  },
-];
+const EASE_OUT = [0.22, 1, 0.36, 1];
+const NAV_STAGGER_BASE_DELAY = 0.15;
+const NAV_STAGGER_STEP = 0.12;
 
 export default function CareersIntro() {
   return (
@@ -104,7 +98,7 @@ export default function CareersIntro() {
           animate={{ opacity: 1, x: 0 }}
           transition={{
             duration: 0.9,
-            ease: [0.22, 1, 0.36, 1],
+            ease: EASE_OUT,
           }}
           className="
             flex
@@ -117,7 +111,7 @@ export default function CareersIntro() {
           "
         >
           <nav className="w-full max-w-[320px] lg:max-w-[250px]">
-            {categories.map((item, index) => (
+            {careersNavLinks.map((item, index) => (
               <motion.div
                 key={item.name}
                 initial={{
@@ -130,8 +124,8 @@ export default function CareersIntro() {
                 }}
                 transition={{
                   duration: 0.7,
-                  delay: 0.15 + index * 0.12,
-                  ease: [0.22, 1, 0.36, 1],
+                  delay: NAV_STAGGER_BASE_DELAY + index * NAV_STAGGER_STEP,
+                  ease: EASE_OUT,
                 }}
               >
                 <Link
@@ -202,7 +196,7 @@ export default function CareersIntro() {
           transition={{
             duration: 1,
             delay: 0.2,
-            ease: [0.22, 1, 0.36, 1],
+            ease: EASE_OUT,
           }}
           className="
             flex

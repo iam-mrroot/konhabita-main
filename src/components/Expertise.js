@@ -4,49 +4,22 @@ import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import { Sparkles, CheckCircle2 } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import { services } from "./Expertise.data";
 
-const services = [
-  {
-    name: "Landscape",
-    link: "/projects/landscape",
-    expertiseLink: "/expertise/landscape-expertise",
-    tagline: "Ecological stewardship & resilient outdoor living environments",
-    tags: ["Civic Parks", "Waterfronts", "Urban Forestry", "Sponge Cities"],
-  },
-  {
-    name: "Planning + Urban Design",
-    link: "/projects/planning-urban-design",
-    expertiseLink: "/expertise/planning-expertise",
-    tagline: "Territorial masterplans & transit-oriented metropolitan frameworks",
-    tags: ["Masterplanning", "Transit Corridors", "Smart Habitats", "Zoning Codes"],
-  },
-  {
-    name: "Architecture",
-    link: "/projects/architecture",
-    expertiseLink: "/expertise/architecture-expertise",
-    tagline: "Biophilic, climate-responsive structures of enduring permanence",
-    tags: ["Institutional", "Mixed-Use", "Cultural Centers", "Private Villas"],
-  },
-  {
-    name: "Interiors",
-    link: "/projects/interiors",
-    expertiseLink: "/expertise/interiors-expertise",
-    tagline: "Tactile, light-driven interior architecture tuned to human wellbeing",
-    tags: ["Workplaces", "Hospitality", "Living Spaces", "Acoustic Craft"],
-  },
-  {
-    name: "Sustainability",
-    link: "/projects/sustainability",
-    expertiseLink: "/expertise/sustainability-expertise",
-    tagline: "Quantitative carbon reduction, passive solar, & circular research",
-    tags: ["Passive Solar", "Rainwater Harvesting", "Circular Materials", "Microclimate CFD"],
-  },
-];
+// Intro timeline timing: heading/paragraph rise together, then the service rows stagger in.
+const ENTRANCE_Y_OFFSET = 30;
+const ROWS_Y_OFFSET = 24;
+const TIMELINE_DELAY = 0.1;
+const ENTRANCE_DURATION = 0.8;
+const ROWS_DURATION = 0.7;
+const ROWS_STAGGER = 0.1;
+const HEADING_START = 0.1;
+const PARAGRAPH_START = 0.25;
+const ROWS_START = 0.35;
 
 export default function Expertise() {
   const sectionRef = useRef(null);
-  const bgRef = useRef(null);
   const headingRef = useRef(null);
   const paragraphRef = useRef(null);
   const rowsRef = useRef(null);
@@ -56,28 +29,23 @@ export default function Expertise() {
     const ctx = gsap.context(() => {
       const rows = rowsRef.current?.querySelectorAll(".service-row");
 
-      gsap.set(bgRef.current, {
-        opacity: 0,
-        scale: 1.05,
-      });
-
       gsap.set(headingRef.current, {
         opacity: 0,
-        y: 30,
+        y: ENTRANCE_Y_OFFSET,
       });
 
       gsap.set(paragraphRef.current, {
         opacity: 0,
-        y: 30,
+        y: ENTRANCE_Y_OFFSET,
       });
 
       gsap.set(rows, {
         opacity: 0,
-        y: 24,
+        y: ROWS_Y_OFFSET,
       });
 
       const tl = gsap.timeline({
-        delay: 0.1,
+        delay: TIMELINE_DELAY,
       });
 
       tl.to(
@@ -85,31 +53,31 @@ export default function Expertise() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: ENTRANCE_DURATION,
           ease: "power3.out",
         },
-        0.1
+        HEADING_START
       )
         .to(
           paragraphRef.current,
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
+            duration: ENTRANCE_DURATION,
             ease: "power3.out",
           },
-          0.25
+          PARAGRAPH_START
         )
         .to(
           rows,
           {
             opacity: 1,
             y: 0,
-            duration: 0.7,
+            duration: ROWS_DURATION,
             ease: "power3.out",
-            stagger: 0.1,
+            stagger: ROWS_STAGGER,
           },
-          0.35
+          ROWS_START
         );
     }, sectionRef);
 

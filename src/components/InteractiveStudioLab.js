@@ -3,100 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, MoveHorizontal, ArrowRight, Sun, Moon, Layers, Leaf, Thermometer, Volume2 } from "lucide-react";
-
-const landscapeMaterials = [
-  {
-    id: "laterite",
-    name: "Quarried Laterite Stone",
-    origin: "Regional Kerala Quarries",
-    carbonMetric: "-65% vs Concrete",
-    performanceMetric: "9.2h Thermal Inertia",
-    application: "Load-bearing Arches & Plinths",
-    color: "#a45a3c",
-    previewImage: "/project9.webp",
-  },
-  {
-    id: "earth",
-    name: "Compressed Earth Blocks",
-    origin: "On-Site Excavated Soil",
-    carbonMetric: "-82% vs Brick",
-    performanceMetric: "11.4h Passive Cooling",
-    application: "Climate-Responsive Bio-Walls",
-    color: "#c28d5d",
-    previewImage: "/project4.webp",
-  },
-  {
-    id: "timber",
-    name: "Mass Timber Glulam",
-    origin: "Certified Agro-Forestry",
-    carbonMetric: "Carbon Sequestering",
-    performanceMetric: "High Tensile Elasticity",
-    application: "Long-Span Roof Structures",
-    color: "#8c6239",
-    previewImage: "/project2.webp",
-  },
-  {
-    id: "sponge",
-    name: "Porous Bio-Pavement",
-    origin: "Recycled Mineral Aggregate",
-    carbonMetric: "-45% Runoff Volume",
-    performanceMetric: "Water Permeable",
-    application: "Civic Plazas & Walkways",
-    color: "#6b7c85",
-    previewImage: "/project1.webp",
-  },
-];
-
-const interiorMaterials = [
-  {
-    id: "lime",
-    name: "Artisanal Lime Plaster",
-    origin: "Natural Mineral Slake",
-    carbonMetric: "100% Zero-VOC Formula",
-    performanceMetric: "Humidity Buffering",
-    application: "Seamless Living Walls & Ceilings",
-    color: "#d9d2c9",
-    previewImage: "/project7.webp",
-  },
-  {
-    id: "teak",
-    name: "Fluted Solid Teak",
-    origin: "Sustainably Harvested Timber",
-    carbonMetric: "Carbon Negative",
-    performanceMetric: "Tactile Biophilic Warmth",
-    application: "Custom Millwork & Jali Screens",
-    color: "#96613d",
-    previewImage: "/project12.webp",
-  },
-  {
-    id: "cement",
-    name: "Monolithic Micro-Cement",
-    origin: "Ultra-Fine Mineral Binder",
-    carbonMetric: "Zero Waste Application",
-    performanceMetric: "Crack-Resistant & Cool",
-    application: "Continuous Flooring & Wet Areas",
-    color: "#7e878c",
-    previewImage: "/project15.webp",
-  },
-  {
-    id: "acoustic",
-    name: "Natural Acoustic Felt",
-    origin: "Recycled Organic Fibers",
-    carbonMetric: "100% Recyclable",
-    performanceMetric: "NRC 0.85 Sound Calm",
-    application: "Ceiling Rafts & Quiet Pods",
-    color: "#52595d",
-    previewImage: "/project16.webp",
-  },
-];
+import { Sparkles, MoveHorizontal, ArrowRight, Layers, Leaf, Volume2 } from "lucide-react";
+import { landscapeMaterials, interiorMaterials } from "./InteractiveStudioLab.data";
 
 export default function InteractiveStudioLab() {
   const [activeVertical, setActiveVertical] = useState("interiors"); // 'interiors' or 'architecture'
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
-  const [timeMode, setTimeMode] = useState("day");
-  
+
   const currentMaterials = activeVertical === "interiors" ? interiorMaterials : landscapeMaterials;
   const [selectedMaterial, setSelectedMaterial] = useState(interiorMaterials[0]);
   const containerRef = useRef(null);

@@ -3,40 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { newsCategories } from "@/data/newsCategories";
+import { workshopImages } from "@/data/workshops";
 
-const categories = [
-  {
-    name: "Podcasts",
-    link: "/news/podcasts",
-  },
-  {
-    name: "Workshops",
-    link: "/news/workshops",
-  },
-  {
-    name: "Monthly Events",
-    link: "/news/monthly-events",
-  },
-];
-
-const workshopImages = [
-  {
-    image: "/workshop-1.jpg",
-    alt: "Workshop discussion",
-  },
-  {
-    image: "/workshop-2.jpg",
-    alt: "Workshop event",
-  },
-  {
-    image: "/workshop-3.jpg",
-    alt: "Workshop participants",
-  },
-  {
-    image: "/workshop-4.jpg",
-    alt: "Workshop presentation",
-  },
-];
+// Standard ease curve and fade-in duration reused across this component's
+// motion transitions.
+const EASE_STANDARD = [0.22, 1, 0.36, 1];
+const FADE_IN_DURATION = 0.8;
 
 export default function Workshops() {
   return (
@@ -52,8 +25,8 @@ export default function Workshops() {
             initial={{ opacity: 0, x: -25 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
-              duration: 0.8,
-              ease: [0.22, 1, 0.36, 1],
+              duration: FADE_IN_DURATION,
+              ease: EASE_STANDARD,
             }}
             className="
               flex
@@ -66,7 +39,7 @@ export default function Workshops() {
           >
             <nav className="w-full max-w-[280px]">
 
-              {categories.map((item, index) => {
+              {newsCategories.map((item, index) => {
                 const active = item.name === "Workshops";
 
                 return (
@@ -83,7 +56,7 @@ export default function Workshops() {
                     transition={{
                       duration: 0.6,
                       delay: 0.15 + index * 0.1,
-                      ease: [0.22, 1, 0.36, 1],
+                      ease: EASE_STANDARD,
                     }}
                   >
                     <Link
@@ -143,9 +116,9 @@ export default function Workshops() {
             scale: 1,
           }}
           transition={{
-            duration: 0.8,
+            duration: FADE_IN_DURATION,
             delay: 0.25 + index * 0.12,
-            ease: [0.22, 1, 0.36, 1],
+            ease: EASE_STANDARD,
           }}
           className="
             group

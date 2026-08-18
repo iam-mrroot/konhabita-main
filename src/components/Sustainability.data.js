@@ -1,0 +1,32 @@
+export const sustainabilityProjects = [
+  {
+    id: "s1",
+    src: "/project1.webp",
+    title: "Net-Zero Research Center",
+    location: "Bengaluru, India",
+    year: "2024",
+    area: "24,000 sq.m",
+    category: "Sustainability",
+    description: "Comprehensive whole-life carbon LCA optimization and EnergyPlus CFD simulations creating a net-positive corporate laboratory.",
+  },
+  {
+    id: "s2",
+    src: "/project2.webp",
+    title: "Wayanad Eco-Lodge Closed Loop",
+    location: "Wayanad, Kerala",
+    year: "2023",
+    area: "8,500 sq.m",
+    category: "Sustainability",
+    description: "100% off-grid ecological sanctuary powered by solar microgrids, circular blackwater reedbeds, and harvested rainwater cisterns.",
+  },
+  {
+    id: "s3",
+    src: "/project4.webp",
+    title: "LEED Platinum Commercial Hub",
+    location: "Kochi, Kerala",
+    year: "2024",
+    area: "42,000 sq.m",
+    category: "Sustainability",
+    description: "Award-winning high-performance commercial tower engineered for 45% reduction in baseline HVAC chiller energy consumption.",
+  },
+];

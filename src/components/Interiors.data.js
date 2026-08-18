@@ -1,0 +1,32 @@
+export const interiorsProjects = [
+  {
+    id: "i1",
+    src: "/project12.webp",
+    title: "Lumina Creative Atelier",
+    location: "Kochi, Kerala",
+    year: "2024",
+    area: "1,400 sq.m",
+    category: "Interiors",
+    description: "An open, biophilic corporate atelier featuring handcrafted teak workstations, acoustic felt acoustic baffles, and live green partition walls.",
+  },
+  {
+    id: "i2",
+    src: "/project7.webp",
+    title: "Minimalist Coastal Penthouse",
+    location: "Calicut, Kerala",
+    year: "2023",
+    area: "550 sq.m",
+    category: "Interiors",
+    description: "Serene seaside residence detailed with lime slake plasters, recessed floor-level lighting, and bespoke cane architectural joinery.",
+  },
+  {
+    id: "i3",
+    src: "/project15.webp",
+    title: "Ayurvedic Wellness Sanctuary",
+    location: "Munnar, Kerala",
+    year: "2024",
+    area: "3,200 sq.m",
+    category: "Interiors",
+    description: "Healing environment combining zero-VOC mineral pigments, textured raw terracotta tiles, and indirect circadian illumination.",
+  },
+];

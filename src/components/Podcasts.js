@@ -2,21 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { newsCategories } from "@/data/newsCategories";
 
-const categories = [
-  {
-    name: "Podcasts",
-    link: "/news/podcasts",
-  },
-  {
-    name: "Workshops",
-    link: "/news/workshops",
-  },
-  {
-    name: "Monthly Events",
-    link: "/news/monthly-events",
-  },
-];
+// Standard ease curve and fade-in duration reused across this component's
+// motion transitions.
+const EASE_STANDARD = [0.22, 1, 0.36, 1];
+const FADE_IN_DURATION = 0.8;
 
 export default function Podcasts() {
   return (
@@ -30,12 +21,12 @@ export default function Podcasts() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{
-              duration: 0.8,
-              ease: [0.22, 1, 0.36, 1],
+              duration: FADE_IN_DURATION,
+              ease: EASE_STANDARD,
             }}
             className="w-full max-w-[300px]"
           >
-            {categories.map((item, index) => {
+            {newsCategories.map((item, index) => {
               const isActive = item.name === "Podcasts";
 
               return (
@@ -92,7 +83,7 @@ export default function Podcasts() {
             transition={{
               duration: 1,
               delay: 0.25,
-              ease: [0.22, 1, 0.36, 1],
+              ease: EASE_STANDARD,
             }}
             className="max-w-[580px]"
           >
@@ -133,7 +124,7 @@ export default function Podcasts() {
               viewport={{ once: true }}
               transition={{
                 delay: 0.6,
-                duration: 0.8,
+                duration: FADE_IN_DURATION,
               }}
               className="
                 mt-6

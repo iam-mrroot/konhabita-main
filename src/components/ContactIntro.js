@@ -4,25 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Phone, Mail } from "lucide-react";
-
-const categories = [
-  {
-    name: "For Collaboration",
-    link: "/contact/collaboration",
-  },
-  {
-    name: "Project Enquiry",
-    link: "/contact/project-enquiry",
-  },
-];
+import { categories } from "./ContactIntro.data";
 
 export default function ContactIntro() {
   return (
     <section className="relative w-full overflow-hidden bg-white lg:min-h-screen">
 
-      {/* =====================================================
-          BACKGROUND IMAGE
-      ====================================================== */}
       <div className="absolute inset-0">
 
         <Image
@@ -75,9 +62,6 @@ export default function ContactIntro() {
       </div>
 
 
-      {/* =====================================================
-          CONTENT
-      ====================================================== */}
       <div
         className="
           relative
@@ -93,9 +77,7 @@ export default function ContactIntro() {
       >
 
 
-        {/* =================================================
-            LEFT MENU
-        ================================================= */}
+        {/* LEFT MENU */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
@@ -159,7 +141,6 @@ export default function ContactIntro() {
                   "
                 >
 
-                  {/* Hover Line */}
                   <span
                     className="
                       absolute
@@ -205,9 +186,7 @@ export default function ContactIntro() {
         </motion.div>
 
 
-        {/* =================================================
-            LOCATION / ADDRESS
-        ================================================= */}
+        {/* LOCATION / ADDRESS */}
         <motion.div
           initial={{
             opacity: 0,
@@ -244,9 +223,7 @@ export default function ContactIntro() {
 
           <div className="w-full max-w-[390px]">
 
-            {/* =================================================
-                BENGALURU
-            ================================================= */}
+            {/* BENGALURU */}
             <div
               className="
                 flex
@@ -279,9 +256,7 @@ export default function ContactIntro() {
             </div>
 
 
-            {/* =================================================
-                ADDRESS
-            ================================================= */}
+            {/* ADDRESS */}
             <div
               className="
                 mt-6
@@ -313,7 +288,6 @@ export default function ContactIntro() {
                 Address
               </h3>
 
-              {/* Divider */}
               <span
                 className="
                   mt-[1px]
@@ -358,9 +332,7 @@ export default function ContactIntro() {
         </motion.div>
 
 
-        {/* =================================================
-            RIGHT CONTENT
-        ================================================= */}
+        {/* RIGHT CONTENT */}
         <motion.div
           initial={{
             opacity: 0,
@@ -397,9 +369,6 @@ export default function ContactIntro() {
 
           <div className="w-full max-w-[600px]">
 
-            {/* =================================================
-                DESCRIPTION
-            ================================================= */}
             <p
               className="
                 max-w-[580px]
@@ -423,9 +392,6 @@ export default function ContactIntro() {
             </p>
 
 
-            {/* =================================================
-                SUB HEADING
-            ================================================= */}
             <p
               className="
                 mt-6
@@ -443,9 +409,7 @@ export default function ContactIntro() {
             </p>
 
 
-            {/* =================================================
-                CONTACT DETAILS
-            ================================================= */}
+            {/* CONTACT DETAILS */}
             <div
               className="
                 mt-10
@@ -466,9 +430,7 @@ export default function ContactIntro() {
               "
             >
 
-              {/* =================================================
-                  PHONE
-              ================================================= */}
+              {/* PHONE */}
               <div className="flex w-full items-center gap-3 sm:w-auto">
 
                 <div
@@ -520,9 +482,7 @@ export default function ContactIntro() {
               </div>
 
 
-              {/* =================================================
-                  EMAIL
-              ================================================= */}
+              {/* EMAIL */}
               <div className="flex w-full items-center gap-3 sm:w-auto">
 
                 <div

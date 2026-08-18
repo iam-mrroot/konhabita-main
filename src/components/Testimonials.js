@@ -2,80 +2,15 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Sparkles, Quote, Star, ArrowRight, ArrowLeft, CheckCircle2, Building, MoveHorizontal } from "lucide-react";
+import { Sparkles, Star, ArrowRight, ArrowLeft, CheckCircle2, Building, MoveHorizontal } from "lucide-react";
+import { testimonials } from "./Testimonials.data";
 
-const testimonials = [
-  {
-    id: 1,
-    quote:
-      "Konhabita transformed our 45-acre masterplan into a living sponge ecosystem. Their integration of hydrological engineering and native flora reduced stormwater infrastructure costs by 32% while establishing a benchmark for civic resilience.",
-    author: "Dr. Tariq Al-Mansoor",
-    role: "Senior Director of Urban Planning",
-    organization: "Dubai Urban Infrastructure Authority",
-    project: "Al-Barari Ecological Corridor",
-    category: "Urban Ecology & Masterplanning",
-    rating: 5,
-    impactMetric: "-32% Runoff Infrastructure Cost",
-    location: "Dubai, UAE",
-    image: "/project1.webp",
-  },
-  {
-    id: 2,
-    quote:
-      "The sensitivity with which Konhabita handles vernacular materiality is unmatched. Our coastal residence stays remarkably cool in tropical humidity with zero active chillers during daylight, framing the Arabian Sea with timeless laterite stone.",
-    author: "Meera & Rajesh Nambiar",
-    role: "Private Patrons",
-    organization: "Nambiar Heritage Trust",
-    project: "Cliffside Laterite Villa",
-    category: "Passive Coastal Architecture",
-    rating: 5,
-    impactMetric: "Zero Daytime Mechanical Cooling",
-    location: "Kovalam, Kerala",
-    image: "/project9.webp",
-  },
-  {
-    id: 3,
-    quote:
-      "Achieving authentic biophilic interiors without compromising acoustic privacy in commercial high-rises is rare. Konhabita’s mass timber joinery and sound-dampening wool rafts delivered our team’s highest-rated workspace globally.",
-    author: "Sarah Jenkins",
-    role: "Head of Global Workplace Strategy",
-    organization: "Apex Innovation Ventures",
-    project: "Lumina Creative Atelier",
-    category: "Interior Architecture & Joinery",
-    rating: 5,
-    impactMetric: "NRC 0.85 Acoustic Performance",
-    location: "Bengaluru, India",
-    image: "/project12.webp",
-  },
-  {
-    id: 4,
-    quote:
-      "Their computational solar modeling gave us confidence from concept to ribbon cutting. The operable timber jali screens cut our annual cooling loads by 40% while preserving panoramic valley views.",
-    author: "Anand Vardhan",
-    role: "Managing Director",
-    organization: "Western Ghats Eco-Resorts",
-    project: "Wayanad Mass Timber Lodge",
-    category: "Regenerative Hospitality",
-    rating: 5,
-    impactMetric: "-40% Annual HVAC Load",
-    location: "Wayanad, Kerala",
-    image: "/project2.webp",
-  },
-  {
-    id: 5,
-    quote:
-      "Their sustainable landscape architecture integrated constructed wetlands into our institutional campus, purifying 100% of graywater on-site for irrigation while restoring native butterfly habitats.",
-    author: "Prof. K. Narayanan",
-    role: "Campus Planning Dean",
-    organization: "Kerala Science & Technology Institute",
-    project: "Bio-Retention Campus Park",
-    category: "Landscape Architecture",
-    rating: 5,
-    impactMetric: "100% On-Site Water Recycling",
-    location: "Kochi, Kerala",
-    image: "/project7.webp",
-  },
-];
+// Mouse-wheel vertical scroll is redirected into horizontal scroll at this multiplier
+const WHEEL_SCROLL_MULTIPLIER = 2.2;
+// Drag-to-pan speed relative to raw pointer movement
+const DRAG_SCROLL_MULTIPLIER = 1.8;
+// Distance (px) the arrow buttons scroll per click
+const ARROW_SCROLL_DISTANCE = 460;
 
 export default function Testimonials() {
   const scrollContainerRef = useRef(null);
@@ -104,7 +39,7 @@ export default function Testimonials() {
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault();
         el.scrollBy({
-          left: e.deltaY * 2.2,
+          left: e.deltaY * WHEEL_SCROLL_MULTIPLIER,
           behavior: "smooth",
         });
       }
@@ -126,7 +61,7 @@ export default function Testimonials() {
     if (!isDragging || !scrollContainerRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollContainerRef.current.offsetLeft;
-    const walk = (x - startX) * 1.8;
+    const walk = (x - startX) * DRAG_SCROLL_MULTIPLIER;
     scrollContainerRef.current.scrollLeft = scrollLeftState - walk;
   };
 
@@ -135,9 +70,8 @@ export default function Testimonials() {
   // Button Steppers
   const scrollStep = (direction) => {
     if (!scrollContainerRef.current) return;
-    const distance = 460;
     scrollContainerRef.current.scrollBy({
-      left: direction === "left" ? -distance : distance,
+      left: direction === "left" ? -ARROW_SCROLL_DISTANCE : ARROW_SCROLL_DISTANCE,
       behavior: "smooth",
     });
   };

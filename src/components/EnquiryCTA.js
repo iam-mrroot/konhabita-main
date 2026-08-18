@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, MessageSquare, ArrowRight, ShieldCheck, Mail, Phone } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 import ProjectEnquiryModal from "./ProjectEnquiryModal";
 
 export default function EnquiryCTA({

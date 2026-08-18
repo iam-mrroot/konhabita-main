@@ -1,17 +1,27 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Sparkles, Send, CheckCircle2, Building, Mail, User, Phone, MapPin, MessageSquare } from "lucide-react";
+import { X, Sparkles, Send, CheckCircle2 } from "lucide-react";
+import { disciplineOptions } from "./ProjectEnquiryModal.data";
 
-export default function ProjectEnquiryModal({ isOpen, onClose, defaultDiscipline = "Architecture" }) {
-  const [formData, setFormData] = useState({
+// Delay before the "submitting" state resolves into the success message.
+const SUBMIT_DELAY_MS = 800;
+// How long the success message stays visible before the modal auto-closes.
+const SUCCESS_MESSAGE_DURATION_MS = 2500;
+
+function createInitialFormData(discipline) {
+  return {
     name: "",
     email: "",
     phone: "",
-    discipline: defaultDiscipline,
+    discipline,
     location: "",
     message: "",
-  });
+  };
+}
+
+export default function ProjectEnquiryModal({ isOpen, onClose, defaultDiscipline = "Architecture" }) {
+  const [formData, setFormData] = useState(() => createInitialFormData(defaultDiscipline));
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -50,16 +60,9 @@ export default function ProjectEnquiryModal({ isOpen, onClose, defaultDiscipline
       setTimeout(() => {
         setIsSuccess(false);
         onClose();
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          discipline: defaultDiscipline,
-          location: "",
-          message: "",
-        });
-      }, 2500);
-    }, 800);
+        setFormData(createInitialFormData(defaultDiscipline));
+      }, SUCCESS_MESSAGE_DURATION_MS);
+    }, SUBMIT_DELAY_MS);
   };
 
   return (
@@ -169,12 +172,11 @@ export default function ProjectEnquiryModal({ isOpen, onClose, defaultDiscipline
                     onChange={(e) => setFormData({ ...formData, discipline: e.target.value })}
                     className="w-full rounded-xl border border-[#0d4969]/15 bg-[#fafafa] px-3.5 py-2.5 text-xs text-[#0d4969] focus:border-[#0d4969] focus:bg-white focus:outline-none transition-colors cursor-pointer"
                   >
-                    <option value="Landscape Architecture">Landscape Architecture</option>
-                    <option value="Architectural Design">Architectural Design</option>
-                    <option value="Urban Planning & Master Design">Urban Planning & Master Design</option>
-                    <option value="Interior Architecture">Interior Architecture</option>
-                    <option value="Sustainability Consultation">Sustainability Consultation</option>
-                    <option value="Integrated Multi-Disciplinary">Integrated Multi-Disciplinary</option>
+                    {disciplineOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>

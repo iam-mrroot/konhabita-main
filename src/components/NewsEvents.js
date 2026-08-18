@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export default function NewsEvents() {
   return (
@@ -139,7 +139,6 @@ export default function NewsEvents() {
               hover:shadow-lg
             "
           >
-            {/* TEXT */}
             <span
               className="
                 text-[13px]
@@ -154,7 +153,6 @@ export default function NewsEvents() {
               View Interactions
             </span>
 
-            {/* ARROW */}
             <span
               className="
                 text-xl

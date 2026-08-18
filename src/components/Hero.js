@@ -28,6 +28,29 @@ export default function Hero() {
   const K_SCROLL_MAX = 1000; // 1000px scroll on K
   const MANIFESTO_SCROLL_MAX = 750; // 750px scroll on drag button / manifesto
 
+  // Lerp factor for scroll-position smoothing (higher = snappier easing)
+  const LERP_FACTOR = 0.08;
+
+  // Wheel scroll speed multipliers per stage
+  const WHEEL_K_MULTIPLIER = 0.9;
+  const WHEEL_MANIFESTO_MULTIPLIER = 0.85;
+
+  // Buffer (px) before a stage boundary counts as "reached", to avoid flicker
+  const STAGE_ADVANCE_BUFFER = 10;
+  const STAGE_RETREAT_BUFFER = 50;
+
+  // Drag progress ratio needed to commit to the next/previous stage
+  const DRAG_COMMIT_THRESHOLD = 0.55;
+
+  // K-shape gateway translation ranges (px) and fade/scale rates at full scroll progress
+  const K_LEFT_X_RANGE = 950;
+  const K_LEFT_Y_RANGE = 360;
+  const K_RIGHT_X_RANGE = 1050;
+  const K_RIGHT_Y_RANGE = 390;
+  const LOGO_FADE_RATE = 1.15;
+  const LOGO_SCALE_RATE = 0.1;
+  const BG_SCALE_RATE = 0.08;
+
   // Interpolated scroll targets
   const targetKScroll = useRef(0);
   const currentKScroll = useRef(0);
@@ -100,30 +123,30 @@ export default function Hero() {
     const render = () => {
       if (!isEnteringRef.current) {
         // ENTITY LEVEL 1: K-GATEWAY OPENING (0 to 1500px)
-        currentKScroll.current += (targetKScroll.current - currentKScroll.current) * 0.08;
+        currentKScroll.current += (targetKScroll.current - currentKScroll.current) * LERP_FACTOR;
         const curK = currentKScroll.current;
         const kProg = Math.max(0, Math.min(1, curK / K_SCROLL_MAX));
 
         gsap.set(".kLeft", {
-          x: -kProg * 950,
-          y: kProg * 360,
+          x: -kProg * K_LEFT_X_RANGE,
+          y: kProg * K_LEFT_Y_RANGE,
         });
         gsap.set(".kRight", {
-          x: kProg * 1050,
-          y: -kProg * 390,
+          x: kProg * K_RIGHT_X_RANGE,
+          y: -kProg * K_RIGHT_Y_RANGE,
         });
         gsap.set(".logo-container", {
-          opacity: Math.max(0, 1 - kProg * 1.15),
-          scale: 1 + kProg * 0.1,
+          opacity: Math.max(0, 1 - kProg * LOGO_FADE_RATE),
+          scale: 1 + kProg * LOGO_SCALE_RATE,
         });
         gsap.set(".bg-layer", {
-          scale: 1 + kProg * 0.08,
+          scale: 1 + kProg * BG_SCALE_RATE,
         });
 
         setStage1Progress(Math.round(kProg * 100));
 
         // When Stage 1 (1500px) completes, switch to Stage 2
-        if (curK >= K_SCROLL_MAX - 10 && activeStage === 1) {
+        if (curK >= K_SCROLL_MAX - STAGE_ADVANCE_BUFFER && activeStage === 1) {
           setActiveStage(2);
           gsap.to(manifestoRef.current, {
             y: "0%",
@@ -131,7 +154,7 @@ export default function Hero() {
             duration: 0.7,
             ease: "power3.out",
           });
-        } else if (curK < K_SCROLL_MAX - 50 && activeStage === 2) {
+        } else if (curK < K_SCROLL_MAX - STAGE_RETREAT_BUFFER && activeStage === 2) {
           setActiveStage(1);
           gsap.to(manifestoRef.current, {
             y: "100%",
@@ -144,12 +167,12 @@ export default function Hero() {
         // ENTITY LEVEL 2: MANIFESTO & DRAG BUTTON SCROLL (0 to 500px)
         if (activeStage === 2) {
           currentManifestoScroll.current +=
-            (targetManifestoScroll.current - currentManifestoScroll.current) * 0.08;
+            (targetManifestoScroll.current - currentManifestoScroll.current) * LERP_FACTOR;
           const curM = currentManifestoScroll.current;
           const mProg = Math.max(0, Math.min(1, curM / MANIFESTO_SCROLL_MAX));
           setStage2Progress(Math.round(mProg * 100));
 
-          if (curM >= MANIFESTO_SCROLL_MAX - 10 && !isEnteringRef.current) {
+          if (curM >= MANIFESTO_SCROLL_MAX - STAGE_ADVANCE_BUFFER && !isEnteringRef.current) {
             navigateToHome();
           }
         }
@@ -169,15 +192,15 @@ export default function Hero() {
 
       if (activeStage === 1) {
         // Stage 1: K-Gateway (1500px)
-        targetKScroll.current += e.deltaY * 0.9;
+        targetKScroll.current += e.deltaY * WHEEL_K_MULTIPLIER;
         targetKScroll.current = Math.max(0, Math.min(K_SCROLL_MAX, targetKScroll.current));
       } else if (activeStage === 2) {
         // Stage 2: Bridging Environment section (500px scroll)
         if (e.deltaY < 0 && targetManifestoScroll.current <= 0) {
           // Scroll back up to Stage 1
-          targetKScroll.current -= Math.abs(e.deltaY) * 0.9;
+          targetKScroll.current -= Math.abs(e.deltaY) * WHEEL_K_MULTIPLIER;
         } else {
-          targetManifestoScroll.current += e.deltaY * 0.85;
+          targetManifestoScroll.current += e.deltaY * WHEEL_MANIFESTO_MULTIPLIER;
           targetManifestoScroll.current = Math.max(
             0,
             Math.min(MANIFESTO_SCROLL_MAX, targetManifestoScroll.current)
@@ -228,7 +251,7 @@ export default function Hero() {
       onDragEnd() {
         const progress = Math.abs(this.y) / maxDrag;
 
-        if (progress > 0.55) {
+        if (progress > DRAG_COMMIT_THRESHOLD) {
           if (activeStage === 1) {
             targetKScroll.current = K_SCROLL_MAX;
             gsap.to(handleRef.current, {
